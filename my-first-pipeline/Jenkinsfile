@@ -1,6 +1,7 @@
 pipeline {
     agent {
-        docker { image 'openjdk:17' }
+        docker { image 'openjdk:17'  
+                args '-v $PWD:/workspace' }
     }
     stages {
         stage('Checkout') {
