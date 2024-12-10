@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repository-url.git'
+                git branch: 'main', url: 'https://github.com/RahmanMomin/Jenkins-Zero-To-Hero.git'
             }
         }
         stage('Compile') {
