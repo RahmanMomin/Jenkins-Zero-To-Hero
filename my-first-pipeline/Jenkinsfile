@@ -12,12 +12,12 @@ pipeline {
         }
         stage('Compile') {
             steps {
-                sh 'javac app.java'
+                sh 'javac App.java'
             }
         }
         stage('Run') {
             steps {
-                sh 'java app.java'
+                sh 'java App'
             }
         }
     }
