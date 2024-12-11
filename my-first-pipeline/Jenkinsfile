@@ -6,32 +6,33 @@ pipeline {
         }
     }
     stages {
-        stage('Checkout and Navigate') {
+        stage('Checkout') {
             steps {
-                // Clone the repository and switch to the correct directory
+                // Clone the repository
                 git branch: 'main', url: 'https://github.com/RahmanMomin/Jenkins-Zero-To-Hero.git'
-                dir('my-first-pipeline') {
-                    sh 'ls -al' // Debug: List files to verify App.java is present
-                }
             }
         }
-        stage('Compile') {
-            steps {
-                // Compile the Java application in the specified directory
-                dir('my-first-pipeline') {
-                    sh 'javac App.java'
+    }
+    post {
+        always {
+            dir('my-first-pipeline') {
+                // Define directory context for all following stages
+                stage('Debug') {
+                    steps {
+                        sh 'ls -al' // Debugging
+                    }
                 }
-            }
-        }
-        stage('Run') {
-            steps {
-                // Run the Java application in the specified directory
-                dir('my-first-pipeline') {
-                    sh 'java App'
+                stage('Compile') {
+                    steps {
+                        sh 'javac App.java'
+                    }
+                }
+                stage('Run') {
+                    steps {
+                        sh 'java App'
+                    }
                 }
             }
         }
     }
 }
-
-
