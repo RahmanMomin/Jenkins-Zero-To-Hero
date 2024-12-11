@@ -15,13 +15,8 @@ pipeline {
     }
     post {
         always {
-            dir('my-first-pipeline') {
-                // Define directory context for all following stages
-                stage('Debug') {
-                    steps {
-                        sh 'ls -al' // Debugging
-                    }
-                }
+            dir('my-first-pipeline') 
+                // Define directory context for all following stage
                 stage('Compile') {
                     steps {
                         sh 'javac App.java'
