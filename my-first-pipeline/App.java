@@ -3,7 +3,5 @@ public class App {
         System.out.println("Hello, World!");
         System.out.println("Hello, Jenkins!");
         System.out.println("Hello, github webhook integration!");
-
-
     }
 }
