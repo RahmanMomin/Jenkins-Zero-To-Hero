@@ -9,6 +9,9 @@ pipeline {
             steps {
                 git branch: 'main', url: 'https://github.com/RahmanMomin/Jenkins-Zero-To-Hero.git'
             }
+            steps {
+                sh 'cd my-first-pipeline'
+            }
         }
         stage('Compile') {
             steps {
