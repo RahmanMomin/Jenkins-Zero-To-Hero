@@ -1,28 +1,37 @@
 pipeline {
     agent {
-        docker { image 'openjdk:17'  
-                args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-               }
+        docker {
+            image 'openjdk:17'
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
+        }
     }
     stages {
-        stage('Checkout') {
+        stage('Checkout and Navigate') {
             steps {
+                // Clone the repository and switch to the correct directory
                 git branch: 'main', url: 'https://github.com/RahmanMomin/Jenkins-Zero-To-Hero.git'
-            }
-            steps {
-                sh 'cd my-first-pipeline'
+                dir('my-first-pipeline') {
+                    sh 'ls -al' // Debug: List files to verify App.java is present
+                }
             }
         }
         stage('Compile') {
             steps {
-                sh 'javac App.java'
+                // Compile the Java application in the specified directory
+                dir('my-first-pipeline') {
+                    sh 'javac App.java'
+                }
             }
         }
         stage('Run') {
             steps {
-                sh 'java App'
+                // Run the Java application in the specified directory
+                dir('my-first-pipeline') {
+                    sh 'java App'
+                }
             }
         }
     }
 }
+
 
